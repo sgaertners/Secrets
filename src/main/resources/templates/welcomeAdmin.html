@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
+    <title>Login System</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div th:insert="~{header :: copy}"></div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="btn btn-secondary active" aria-current="page" th:href="@{/logout}" th:text="#{welcome.logoff}"></a>
+                </li>
+            </ul>
+        </div>
+        <div th:insert="~{adminbuttons :: copy}"></div>
+        <div th:insert="~{buttons :: copy}"></div>
+    </nav>
+    <br /><br />
+
+    <div class="container-xxl">
+        <div th:if="${param.error}">
+            <div class="alert alert-danger" th:text="#{msg.invalidlogin}"></div>
+        </div>
+        <div class="row">
+            <p class="fs-4 fw-bold" th:text="#{page.admin.title}"></p>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th th:text="#{page.admin.nr}">Nr.</th>
+                    <th th:text="#{page.admin.username}">Username</th>
+                    <th th:text="#{page.admin.name}">Name</th>
+                    <th th:text="#{page.admin.email}">E-Mail</th>
+                    <th th:text="#{page.admin.roles}">Rolle(n)</th>
+                    <th th:text="#{page.admin.status}">Status</th>
+                    <th th:text="#{page.admin.action}">Aktion</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user, usersStat : ${users}">
+                    <td th:text="${usersStat.count}" class="align-middle"></td>
+                    <td th:text="${user.username}" class="align-middle"></td>
+                    <td th:text="${user.name}" class="align-middle"></td>
+                    <td th:text="${user.email}" class="align-middle"></td>
+                    <td th:text="${userroles.get( usersStat.index )}" class="align-middle"></td>
+                    <td th:class="align-middle">
+<!--                        <span th:class="fs-3">&#x1f642;</span>-->
+                        <span th:class="fs-4" th:utext="${!user.enabled} ? '&#x1F511;' : ''"></span>
+                        <span th:class="fs-2" th:utext="${userroles.get( usersStat.index ).contains('ADMIN')} ? '&#x1f46e;' : ''"></span>
+                    </td>
+                    <td th:class="align-middle">
+                        <a type="button" class="btn btn-primary" th:href="@{/rolesfromuser(id=${user.id} , lang=${lang})}" th:text="#{page.admin.btn.roles}"></a>&nbsp;
+                        <a th:class="${user.enabled}? 'btn btn-secondary' : 'btn btn-success'"
+                           th:href="@{/togglelockuser(id=${user.id})}"
+                           th:text="${user.enabled}? #{page.admin.btn.lock} : #{page.admin.btn.unlock}"
+                           th:if="${!userroles.get( usersStat.index ).contains('ADMIN')}">
+                        </a>&nbsp;
+                        <a class="btn btn-danger" th:href="@{/deleteuser(id=${usersStat.count})}" th:if="${!userroles.get( usersStat.index ).contains('ADMIN')}" th:text="#{page.admin.btn.delete}"></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade modal-dialog modal-dialog-centered" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Rollen zum Benutzer</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}" type="application/javascript"></script>
+    <script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js}" type="application/javascript"></script>
+</body>
+</html>

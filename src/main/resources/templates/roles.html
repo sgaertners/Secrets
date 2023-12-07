@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
+    <title>Login System</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div th:insert="~{header :: copy}"></div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="btn btn-secondary active" aria-current="page" th:href="@{/logout}" th:text="#{welcome.logoff}"></a>
+                </li>
+            </ul>
+        </div>
+        <div th:insert="~{adminbuttons :: copy}"></div>
+        <div th:insert="~{buttons :: copy}"></div>
+    </nav>
+    <br /><br />
+
+    <div class="container">
+        <h1 th:text="#{buttons.roles}"></h1>
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th th:text="#{page.role.nr}">Nr.</th>
+                        <th th:text="#{page.role.name}">Rolle</th>
+                        <th th:text="#{page.action}">Aktion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="role, roleStat : ${roles}">
+                        <td th:text="${roleStat.count}" class="align-middle"></td>
+                        <td th:text="${role.name}" class="align-middle"></td>
+                        <td><a class="btn btn-danger" th:if="${role.name != 'ADMIN'} and ${role.name != 'USER'}" th:text="#{page.delete}" th:href="@{/deleterole(id=${role.id})}">Löschen</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <form action="/addrole" method="post">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <div class="row">
+                <div class="col-12">
+                    <label for="role" class="form-label" th:text="#{page.role.new}"></label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <input type="text" class="form-control" id="role" name="role">
+                </div>
+                <div class="col-6">
+                    <input type="submit" class="btn btn-success" th:value="#{page.role.submit}" />
+                </div>
+            </div>
+            <div class="col-12">
+                <br />
+                <a class="btn btn-secondary" th:href="@{/welcome}" th:text="#{page.back}"></a>
+            </div>
+        </form>
+    </div>
+
+    <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}" type="application/javascript"></script>
+    <script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js}" type="application/javascript"></script>
+</body>
+</html>

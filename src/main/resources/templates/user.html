@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
+    <title>Login System</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div th:insert="~{header :: copy}"></div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="btn btn-secondary aactive" aria-current="page" th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
+        </div>
+        <div th:insert="~{buttons :: copy}"></div>
+    </nav>
+    <br /><br />
+
+    <div class="container-sm">
+        <form method="POST" enctype="application/x-www-form-urlencoded" th:action="@{/user}" th:object="${user}">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <p class="fs-4 fw-bold" th:text="#{page.profile.title}"></p>
+            <div class="row"><div class="col-12 p-2">
+                <input type="hidden" id="id" name="id" th:field="*{id}">
+                <label for="name" class="form-label" th:text="#{page.profile.name}"></label>
+                <input type="text" class="form-control" id="name" name="name" th:field="*{name}">
+            </div></div>
+            <div class="row"><div class="col-12 p-2">
+                <label for="username" class="form-label" th:text="#{page.profile.username}">Username:</label>
+                <input type="text" class="form-control" id="username" name="username" th:field="*{username}">
+            </div></div>
+            <div class="row"><div class="col-12 p-2">
+                <label for="email" class="form-label" th:text="#{page.profile.email}">E-Mail:</label>
+                <input type="text" class="form-control" id="email" name="email" th:field="*{email}">
+            </div></div>
+            <div class="row"><div class="col-12 p-2">
+                <label for="password" class="form-label" th:text="#{page.profile.password}">Passwort:</label>
+                <input type="password" class="form-control" id="password" name="password" th:field="*{password}">
+            </div></div>
+            <div class="row"><div class="col-12 p-2">
+                <input type="hidden" id="enabled" name="enabled" th:field="*{enabled}">
+                <input type="hidden" id="accountNonExpired" name="accountNonExpired" th:field="*{accountNonExpired}">
+            </div></div>
+            <div class="row"><div class="col-12 p-2">
+                <input type="hidden" id="accountNonLocked" name="accountNonLocked" th:field="*{accountNonLocked}">
+                <input type="hidden" id="credentialsNonExpired" name="credentialsNonExpired" th:field="*{credentialsNonExpired}">
+            </div></div>
+            <a class="btn btn-secondary" th:href="@{/welcome}" th:text="#{page.back}"></a>&nbsp;&nbsp;
+            <button class="btn btn-primary" type="submit" th:text="#{page.profile.submit}">Senden</button>
+        </form>
+    </div>
+
+    <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}" type="application/javascript"></script>
+    <script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js}" type="application/javascript"></script>
+</body>
+</html>

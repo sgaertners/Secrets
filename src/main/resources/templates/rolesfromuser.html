@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
+    <title>Login System</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div th:insert="~{header :: copy}"></div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="btn btn-secondary active" aria-current="page" th:href="@{/logout}" th:text="#{welcome.logoff}"></a>
+                </li>
+            </ul>
+        </div>
+        <div th:insert="~{adminbuttons :: copy}"></div>
+        <div th:insert="~{buttons :: copy}"></div>
+    </nav>
+    <br /><br />
+
+    <div class="container-xxl">
+        <div class="row">
+            <p class="fs-4 fw-bold" th:text="#{page.userroles.title} + ' ' +${name}"></p>
+        </div>
+        <div class="row">
+            <form method="post" action="/updateuserroles">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <div class="form-check fs-5" th:each="actrole : ${allroles}">
+                    <label th:for="${actrole.getName()}" th:text="'&nbsp;' + ${actrole.getName()}"></label>
+                    <input th:type="checkbox" class="form-check-input"
+                           th:id="${actrole.getName()}"
+                           th:name="${actrole.getName()}"
+                           th:value="true"
+                           th:checked="${roles.contains(actrole)}">
+                </div>
+                <br />
+                <a class="btn btn-secondary" th:href="@{/welcome}" th:text="#{page.back}"></a>
+                <input class="btn btn-primary" type="submit" value="Übernehmen">
+            </form>
+        </div>
+    </div>
+
+
+    <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}" type="application/javascript"></script>
+    <script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js}" type="application/javascript"></script>
+   </body>
+</html>

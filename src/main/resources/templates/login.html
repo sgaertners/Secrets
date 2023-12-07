@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
+    <title>Login System</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div th:insert="~{header :: copy}"></div>
+    </nav>
+    <br /><br />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+
+                <div th:if="${param.error}">
+                    <div class="alert alert-danger" th:text="#{msg.invalidlogin}"></div>
+                </div>
+                <div th:if="${param.logout}">
+                    <div class="alert alert-success" th:text="#{msg.loggedout}"></div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="text-center" th:text="#{page.login.title}"></h2>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" role="form" th:action="@{/login}" class="form-horizontal">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <div class="form-group mb-3">
+                                <label class="control-label" th:text="#{page.login.email}"></label>
+                                <input type="text" id="username" name="username" class="form-control" th:placeholder="#{page.login.email.placeholder}"/>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label class="control-label" th:text="#{page.login.password}"></label>
+                                <input type="password" id="password" name="password" class="form-control" th:placeholder="#{page.login.password.placeholder}"/>
+                            </div>
+                            <div class="form-group mb-3">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <button type="submit" class="btn btn-primary" th:text="#{page.login.submit}"></button>
+                                        </div>&nbsp;&nbsp;&nbsp;
+                                        <div class="col-7 text-end" th:text="#{page.login.noregister}">
+                                        </div>
+                                        <div class="col-2">
+                                            <a class="btn btn-secondary" th:href="@{/login/register}" th:text="#{page.login.register}"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}" type="application/javascript"></script>
+    <script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js}" type="application/javascript"></script>
+</body>
+</html>
