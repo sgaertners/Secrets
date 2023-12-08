@@ -142,4 +142,10 @@ INSERT IGNORE INTO `languages` (`id`, `locale`, `messagekey`, `messagecontent`) 
      (133,'de','page.register.registered','Wenn Sie sich schon registriert haben...'),
      (134,'en','page.register.registered','In case you already registered...'),
      (135,'de','page.register.login','Anmelden'),
-     (136,'en','page.register.login','Login');
+     (136,'en','page.register.login','Login'),
+     (137,'de','button.help','Hilfe'),
+     (138,'en','button.help','Help'),
+     (139,'de','help.title','Über...'),
+     (140,'en','help.title','About...'),
+     (141,'de','help.text','Dies Programm basiert auf Spring 6, Spring Boot 3, Spring Security 6, Thymeleaf, Bootstrap 5.3.2, JQuery 3.7.1, MySQL 8 und Java 17.<br /><br />Das Programm kann damit als Startpunkt für eigene, abgesicherte Anwendungen dienen, da zudem ein Rollenkonzept implementiert wurde, das es erlaubt einem Benutzer mehrere Rollen zuzuweisen.<br /><br />Zusätzlich wurde eine Datenbankbasierte I18N-Lokalisierung, mit zwei Sprachen (Deutsch & Englisch) eingebaut.<br /><br />Inspiriert wurde die Entwicklung durch die Arbeit folgender Personen bzw. Firmen mit veröffentlichten Beispielen:<br /><br />- Eugen from www.baeldung.com<br />- Ramesh Fadatare von www.javaguides.net<br />- Phrase von www.phrase.com'),
+     (142,'en','help.text','This program is based on Spring 6, Spring Boot 3, Spring Security 6, Thymeleaf, Bootstrap 5.3.2, JQuery 3.7.1, MySQL 8 and Java 17.<br /><br />The program can therefore serve as a starting point for your own secure applications. A role concept has also been implemented that allows a user to be assigned several roles.<br /><br />In addition, a database-based I18N localisation with two languages (German & English) was implemented.<br /><br />The development was inspired by the work of the following people and companies with published examples:<br /><br />- Eugen from www.baeldung.com<br />- Ramesh Fadatare from www.javaguides.net<br />- Phrase from www.phrase.com');

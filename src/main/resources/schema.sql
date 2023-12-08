@@ -35,5 +35,5 @@ create table if not exists languages (
     id             int not null primary key,
     locale         varchar(255) null,
     messagekey     varchar(255) null,
-    messagecontent varchar(255) null
+    messagecontent varchar(4096) null
 );

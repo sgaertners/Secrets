@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="copy">
+        <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="help" aria-labelledby="helpLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="helpLabel" th:text="#{help.title}"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <p th:utext="#{help.text}"></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

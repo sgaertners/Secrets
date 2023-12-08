@@ -54,6 +54,8 @@
             <a class="btn btn-secondary" th:href="@{/welcome}" th:text="#{page.back}"></a>&nbsp;&nbsp;
             <button class="btn btn-primary" type="submit" th:text="#{page.profile.submit}">Senden</button>
         </form>
+
+        <div th:insert="~{last :: copy}"></div>
     </div>
 
     <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}" type="application/javascript"></script>
