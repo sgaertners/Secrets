@@ -24,10 +24,14 @@
 
     <div class="container">
         <div class="row">
-            <div class="d-flex flex-nowrap" th:utext="${html}">
+            <h1> WHISKEYS!</h1>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <br />
+                <a class="btn btn-secondary" th:href="@{/welcome}" th:text="#{page.back}"></a>
             </div>
         </div>
-
         <div th:insert="~{last :: copy}"></div>
     </div>
 

@@ -1,0 +1,7 @@
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">${headline}</h5>
+    <p class="card-text">${text}</p>
+    <a href="${endpoint}" class="btn btn-primary">${button}</a>
+  </div>
+</div>

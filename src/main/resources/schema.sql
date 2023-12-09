@@ -37,3 +37,13 @@ create table if not exists languages (
     messagekey     varchar(255) null,
     messagecontent varchar(4096) null
 );
+
+create table if not exists apps (
+    id          int not null primary key,
+    role        varchar(255) not null unique,
+    endpoint    varchar(255) not null unique,
+    image       Blob null,
+    headline    varchar(255),
+    text        varchar(1024),
+    button        varchar(255)
+);

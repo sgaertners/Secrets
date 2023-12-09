@@ -55,6 +55,8 @@ public class SpringSecurityConfig {
                 .requestMatchers("/rolesfromuser/**").authenticated()
                 .requestMatchers("/updateuserroles/**").authenticated()
                 .requestMatchers("/welcome/**").authenticated()
+                .requestMatchers("/whiskey/**").authenticated()
+                .requestMatchers("/dbimage").authenticated()
                 .requestMatchers("/resources/**").permitAll()
                 .requestMatchers("/webjars/**").permitAll()
                 .requestMatchers("/").permitAll()

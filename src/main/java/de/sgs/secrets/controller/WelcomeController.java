@@ -1,9 +1,12 @@
 package de.sgs.secrets.controller;
 
+import de.sgs.secrets.entities.App;
 import de.sgs.secrets.entities.Role;
 import de.sgs.secrets.entities.User;
+import de.sgs.secrets.services.AppsService;
 import de.sgs.secrets.services.CustomUserDetailsService;
 import de.sgs.secrets.services.RolesService;
+import de.sgs.secrets.tools.HtmlTools;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -17,10 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -37,10 +37,14 @@ public class WelcomeController {
     private static final Logger LOGGER = LoggerFactory.getLogger(WelcomeController.class);
     private final CustomUserDetailsService userDetailsService;
     private final RolesService rolesService;
+    private final AppsService appsService;
+    private final HtmlTools htmlTools;
 
-    public WelcomeController(CustomUserDetailsService userDetailsService, RolesService rolesService) {
+    public WelcomeController(CustomUserDetailsService userDetailsService, RolesService rolesService, AppsService appsService, HtmlTools htmlTools) {
         this.userDetailsService = userDetailsService;
         this.rolesService = rolesService;
+        this.appsService = appsService;
+        this.htmlTools = htmlTools;
     }
 
     @GetMapping(value={"/welcome", "/index", "/"})
@@ -55,7 +59,6 @@ public class WelcomeController {
         if (authentication != null) {
             String name = authentication.getName();
             UserDetails userDetails = userDetailsService.loadUserByUsername(name);
-            out.println(userDetails.isEnabled());
             httpSession.setAttribute("userdetails", userDetails);
 
             if (userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ADMIN"))) {
@@ -71,7 +74,7 @@ public class WelcomeController {
 
     @GetMapping("/welcome/admin")
     public String welcomeAdmin(@RequestParam String lang, HttpSession httpSession, Model model) {
-        LOGGER.info("LANGUAGE: Admin={}", lang);
+        LOGGER.info("LANGUAGE: {}", lang);
         httpSession.setAttribute("lang", lang);
         model.addAttribute("lang", lang);
         List<User> userList = userDetailsService.loadAlluser();
@@ -93,10 +96,34 @@ public class WelcomeController {
     }
 
     @GetMapping("/welcome/user")
-    public String welcomeUser(@RequestParam String lang, HttpSession httpSession) {
-        LOGGER.info("LANGUAGE: User={}", lang);
+    public String welcomeUser(@RequestParam String lang, HttpSession httpSession, Model model) {
+        LOGGER.info("LANGUAGE: {}", lang);
         httpSession.setAttribute("lang", lang);
 
+        StringBuilder html = new StringBuilder();
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            List<String> appRoles = this.appsService.getRoleList();
+            String name = authentication.getName();
+            User user = userDetailsService.loadUser(name);
+            Set<Role> roles = user.getRoles();
+            List<String> userRoles = new ArrayList<>();
+            for (Role role: roles) {
+                userRoles.add(role.getName());
+            }
+            for (String role: appRoles) {
+                if (userRoles.contains(role)) {
+                    App app = this.appsService.getAppByRole(role);
+                    if (app != null) {
+                        html.append(htmlTools.generateCardFromApp(app, lang));
+                    }
+                }
+            }
+
+        }
+
+        model.addAttribute("html", html);
         return "welcomeUser";
     }
 
@@ -111,7 +138,7 @@ public class WelcomeController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
             String name = authentication.getName();
-            out.println(name);
+//            out.println(name);
         }
 
         return "welcome";
@@ -141,6 +168,12 @@ public class WelcomeController {
         List<Role> allRoles = rolesService.getAllRoles();
         userDetailsService.updateUserRoles(id, data, allRoles);
         return "redirect:welcome";
+    }
+
+
+    @RequestMapping("/dbimage")
+    public @ResponseBody byte[] loadImage(@RequestParam Long id) {
+        return this.appsService.getImageById(id);
     }
 
 }
