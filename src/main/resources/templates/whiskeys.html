@@ -23,15 +23,92 @@
     <br /><br />
 
     <div class="container">
-        <div class="row">
-            <h1> WHISKEYS!</h1>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <br />
-                <a class="btn btn-secondary" th:href="@{/welcome}" th:text="#{page.back}"></a>
+        <h3 th:text="#{page.whiskey.title}"></h3>
+        <br />
+        <form method="POST" enctype="multipart/form-data" th:action="@{/whiskey/upload}" th:object="${whiskey}">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group mb-3">
+                        <label class="control-label" th:text="#{page.whiskey.name}"></label>
+                        <input type="text" id="name" name="name" class="form-control" th:placeholder="#{page.whiskey.name.placeholder}" th:field="*{name}"/>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="form-group mb-3">
+                        <label class="control-label" th:text="#{page.whiskey.age}"></label>
+                        <input type="number" id="age" name="age" class="form-control" th:placeholder="#{page.whiskey.age.placeholder}" th:field="*{age}"/>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="form-group mb-3">
+                        <label class="control-label" th:text="#{page.whiskey.vol}"></label>
+                        <input type="number" id="vol" name="vol" class="form-control" th:placeholder="#{page.whiskey.vol.placeholder}" th:field="*{vol}"/>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="form-group mb-3">
+                        <label class="control-label" th:text="#{page.whiskey.size}"></label>
+                        <input type="number" id="size" name="size" class="form-control" th:placeholder="#{page.whiskey.size.placeholder}" th:field="*{size}"/>
+                    </div>
+                </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group mb-3">
+                        <label class="control-label" th:text="#{page.whiskey.taste}"></label>
+                        <input type="text" id="taste" name="taste" class="form-control" th:placeholder="#{page.whiskey.taste.placeholder}" th:field="*{taste}"/>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group mb-3">
+                        <label class="control-label" th:text="#{page.whiskey.barrel}"></label>
+                        <input type="text" id="barrel" name="barrel" class="form-control" th:placeholder="#{page.whiskey.barrel.placeholder}" th:field="*{barrel}"/>
+                    </div>
+                </div> <div class="col-3">
+                    <div class="form-group mb-3">
+                        <label class="control-label" th:text="#{page.whiskey.type}"></label>
+                        <input type="text" id="type" name="type" class="form-control" th:placeholder="#{page.whiskey.type.placeholder}" th:field="*{type}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group mb-3">
+                        <label class="control-label" th:text="#{page.whiskey.destillery}"></label>
+                        <input type="text" id="destillery" name="destillery" class="form-control" th:placeholder="#{page.whiskey.destillery.placeholder}" th:field="*{destillery}"/>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group mb-3">
+                        <label class="control-label" th:text="#{page.whiskey.town}"></label>
+                        <input type="text" id="town" name="town" class="form-control" th:placeholder="#{page.whiskey.town.placeholder}" th:field="*{town}"/>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group mb-3">
+                        <label class="control-label" th:text="#{page.whiskey.country}"></label>
+                        <input type="text" id="country" name="country" class="form-control" th:placeholder="#{page.whiskey.country.placeholder}" th:field="*{country}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="mb-3">
+                        <label for="file" class="form-label" th:text="#{page.whiskey.file}">Default file input example</label>
+                        <input class="form-control" type="file" id="file" name="file">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <br />
+                    <a class="btn btn-secondary" th:href="@{/welcome}" th:text="#{page.back}"></a>&nbsp;&nbsp;&nbsp;
+                    <a class="btn btn-primary" th:href="@{/whiskey/list}" th:text="#{page.whiskey.list}"></a>&nbsp;&nbsp;&nbsp;
+                    <button type="submit" class="btn btn-success" th:text="#{page.whiskey.submit}"></button>
+                </div>
+            </div>
+        </form>
+
         <div th:insert="~{last :: copy}"></div>
     </div>
 

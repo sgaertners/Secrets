@@ -45,5 +45,23 @@ create table if not exists apps (
     image       Blob null,
     headline    varchar(255),
     text        varchar(1024),
-    button        varchar(255)
+    button      varchar(255)
+);
+
+create table if not exists whiskeys (
+    id          bigint auto_increment primary key,
+    name        varchar(255),
+    age         int,
+    vol         float,
+    size        float,
+    taste       varchar(255),
+    barrel      varchar(255),
+    type        varchar(255),
+    destillery  varchar(255),
+    town        varchar(255),
+    country     varchar(255),
+    image       LONGBLOB,
+    imagename   varchar(255),
+    tastingnote varchar(1024),
+    tastingdate DATETIME
 );

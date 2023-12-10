@@ -22,7 +22,7 @@ class SecretsApplicationTests {
 
     @Test
     void loadImages() {
-        byte[] image = Helper.loadResource("static/images/whiskey.png");
+        byte[] image = Helper.loadResource("static/images/whiskey3.png");
         App app = appsService.getAppByRole("WHISKEY");
         app.setImage(image);
         appsService.saveApp(app);
