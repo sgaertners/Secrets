@@ -406,6 +406,7 @@
              Paragraph p = new Paragraph();
              p.setLeading(10f);
              p.setSpacingBefore(-5);
+             p.setAlignment(Element.ALIGN_CENTER);
              img = Image.getInstance(picture);
              int identation = 0;
              float scalingFactor = ((document.getPageSize().getWidth() - document.leftMargin() - document.rightMargin() - identation) / img.getWidth()) * 50;

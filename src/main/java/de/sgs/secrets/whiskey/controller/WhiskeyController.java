@@ -198,7 +198,7 @@ public class WhiskeyController {
             oPdf.writeNormal14Text(sb.toString());
 
             if (!whiskey.getDestillery().isEmpty()) {
-                oPdf.writeBold14Text("Destillerie: ");
+                oPdf.writeBold16Text("Destillerie: ");
                 oPdf.writeNormal14Text(whiskey.getDestillery() + ", ");
                 oPdf.writeNormal14Text(whiskey.getTown() + ", ");
                 oPdf.writeNormal14Text(whiskey.getCountry());
@@ -206,7 +206,7 @@ public class WhiskeyController {
             }
 
             if (!whiskey.getTaste().isEmpty()) {
-                oPdf.writeBold14Text("Geschmack: ");
+                oPdf.writeBold16Text("Geschmack: ");
                 oPdf.writeNormal14Text(whiskey.getTaste());
                 oPdf.writeEmptyLine();
             }
