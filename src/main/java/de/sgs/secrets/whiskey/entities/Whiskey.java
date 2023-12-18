@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.sql.Blob;
 import java.sql.Date;
@@ -15,6 +16,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @Entity
 @Table(name = "whiskeys")
+//@Cacheable("whiskey")
 public class Whiskey {
 
     @Id
@@ -33,7 +35,7 @@ public class Whiskey {
     @Column
     private String barrel;
     @Column
-    private String type;
+    private String typ;
     @Column
     private String destillery;
     @Column
@@ -48,5 +50,8 @@ public class Whiskey {
     private String tastingnote;
     @Column
     private Date tastingdate;
-
+    @Column
+    private Long userID;
+    @Column
+    private String userNAME;
 }

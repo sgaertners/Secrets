@@ -56,12 +56,14 @@ create table if not exists whiskeys (
     size        float,
     taste       varchar(255),
     barrel      varchar(255),
-    type        varchar(255),
+    typ        varchar(255),
     destillery  varchar(255),
     town        varchar(255),
     country     varchar(255),
     image       LONGBLOB,
     imagename   varchar(255),
     tastingnote varchar(1024),
-    tastingdate DATETIME
+    tastingdate DATETIME,
+    userId      bigint,
+    userName    varchar(255)
 );

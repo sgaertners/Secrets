@@ -133,6 +133,11 @@ public class WelcomeController {
         return "login";
     }
 
+    @RequestMapping("/logout")
+    public void logout() {
+        Authentication authentication = SecurityContextHolder.createEmptyContext().getAuthentication();
+    }
+
     @GetMapping("/failure")
     public String failure(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

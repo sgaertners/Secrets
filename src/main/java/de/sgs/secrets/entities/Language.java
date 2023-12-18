@@ -2,11 +2,13 @@ package de.sgs.secrets.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.annotation.Order;
 
 @Data
 @Entity
 @Table(name = "languages")
+@Cacheable("language")
 public class Language {
 
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.CacheControl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -24,12 +25,12 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 @Configuration
 @AllArgsConstructor
 @EnableWebSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SpringSecurityConfig {
 
 
@@ -41,6 +42,8 @@ public class SpringSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         HttpSessionRequestCache requestCache = new HttpSessionRequestCache();
+        requestCache.setCreateSessionAllowed(true);
+//        requestCache.setMatchingRequestParameterName(String.valueOf(CacheControl.maxAge(365, TimeUnit.DAYS)));
         requestCache.setMatchingRequestParameterName(null);
         http
 //                .csrf(Customizer.withDefaults())
@@ -57,8 +60,12 @@ public class SpringSecurityConfig {
                 .requestMatchers("/welcome/**").authenticated()
                 .requestMatchers("/whiskey/**").authenticated()
                 .requestMatchers("/whiskey/save").authenticated()
+                .requestMatchers("/whiskey/update").authenticated()
                 .requestMatchers("/whiskey/upload").authenticated()
+                .requestMatchers("/whiskey/editwhiskey").authenticated()
+                .requestMatchers("/whiskey/deletewhiskey").authenticated()
                 .requestMatchers("/whiskey/list").authenticated()
+                .requestMatchers("/whiskey/print").authenticated()
                 .requestMatchers("/dbimage").authenticated()
                 .requestMatchers("/resources/**").permitAll()
                 .requestMatchers("/webjars/**").permitAll()

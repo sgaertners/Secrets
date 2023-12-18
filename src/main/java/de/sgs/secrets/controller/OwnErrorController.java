@@ -15,6 +15,9 @@ public class OwnErrorController implements ErrorController {
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
         if (status != null) {
             Integer statusCode = Integer.valueOf(status.toString());
+            if(statusCode == HttpStatus.FORBIDDEN.value()) {
+                return "error403";
+            }
             if(statusCode == HttpStatus.NOT_FOUND.value()) {
                 return "error404";
             }

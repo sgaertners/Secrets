@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.Set;
 
@@ -14,6 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
+//@Cacheable("user")
 public class User {
 
     @Id
@@ -34,7 +36,6 @@ public class User {
     private boolean credentialsNonExpired;
     @Column(nullable = false, columnDefinition = "Boolean")
     private boolean enabled;
-
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "users_roles",

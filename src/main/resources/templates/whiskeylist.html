@@ -18,7 +18,6 @@
                 </li>
             </ul>
         </div>
-        <div th:insert="~{adminbuttons :: copy}"></div>
         <div th:insert="~{buttons :: copy}"></div>
     </nav>
     <br /><br />
@@ -26,6 +25,31 @@
     <div class="container-xxl">
         <div class="row">
             <p class="fs-4 fw-bold" th:text="#{page.whiskey.list.title}"></p>
+        </div>
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th th:text="#{page.whiskey.list.nr}"></th>
+                        <th th:text="#{page.whiskey.list.name}"></th>
+                        <th th:text="#{page.whiskey.list.age}"></th>
+                        <th th:text="#{page.whiskey.list.country}"></th>
+                        <th th:text="#{page.whiskey.list.action}"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="whiskey, whiskeysStat : ${whiskeys}">
+                        <td th:text="${whiskeysStat.count}" class="align-middle"></td>
+                        <td th:text="${whiskey.name}" class="align-middle"></td>
+                        <td th:text="${whiskey.age}" th:class="align-middle"></td>
+                        <td th:text="${whiskey.country}" th:class="align-middle"></td>
+                        <td>
+                            <a class="btn btn-danger" th:href="@{/whiskey/deletewhiskey(id=${whiskey.id})}" th:text="#{page.whisky.list.btn.delete}"></a>
+                            <a class="btn btn-success" th:href="@{/whiskey/editwhiskey(id=${whiskey.id})}" th:text="#{page.whisky.list.btn.edit}"></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <div class="row">
             <div class="col-12">
