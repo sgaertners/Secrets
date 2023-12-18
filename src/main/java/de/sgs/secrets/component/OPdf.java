@@ -419,47 +419,6 @@
 
  // =======================================================================================================================================
 
-//     public void writeImage(int i, ScreenshotPdfData data) {
-//         Image img = null;
-//         greyBar("Screenshot " + i);
-//         try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-//             ImageIO.write(data.getImage(), "jpg", baos);
-//             byte[] imgBytes = baos.toByteArray();
-//             Paragraph p = new Paragraph();
-//             p.setLeading(10f);
-//             p.setSpacingBefore(-5);
-//             img = Image.getInstance(imgBytes);
-//             LOG.debug("IMAGE: Number {}", i);
-//             LOG.debug("IMAGE-HEIGHT: " + img.getHeight());
-//             LOG.debug("IMAGE-WIDTH: " + img.getWidth());
-//             int identation = 0;
-//             if (img.getHeight() > img.getWidth() && img.getHeight() >= 960) {
-//                 identation = 100;
-//             }
-//             float scalingFactor = ((document.getPageSize().getWidth() - document.leftMargin() - document.rightMargin() - identation) / img.getWidth()) * 100;
-//             LOG.debug("IMAGE-SCALING-FACTOR: {}%", Math.round(scalingFactor));
-//             img.scalePercent(Math.round(scalingFactor));
-//             p.add(img);
-//             p.add(new Chunk("screenshot" + i + ".png, ", fontNormal12));
-//             p.add(new Chunk(STELLEIM + data.getSecStart(), fontNormal12));
-//             if (data.getSecondEnd() > 0) {
-//                 p.add(new Chunk(", " + ENDEIM + data.getSecEnd(), fontNormal12));
-//             }
-//             p.add(Chunk.NEWLINE);
-//             p.add(Chunk.NEWLINE);
-//             p.setLeading(12);
-//             p.add(new Chunk(data.getDescription(), fontNormal12));
-//             p.add(Chunk.NEWLINE);
-//             this.document.add(p);
-//             this.document.add(new Paragraph(""));
-//             this.document.add(Chunk.NEXTPAGE);
-//         } catch(Exception ex) {
-//             ex.printStackTrace();
-//         }
-//     }
-
- // =====================================================================================================================
-
      public static void removeBlankPdfPages(PdfReader r) throws IOException{
          PdfTextExtractor extractor = new PdfTextExtractor(r);
          List<Integer> paginas = new ArrayList<Integer>();
