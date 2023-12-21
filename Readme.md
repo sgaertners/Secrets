@@ -15,3 +15,4 @@ The development was inspired by the work of the following people and companies w
     - Eugen from www.baeldung.com
     - Ramesh Fadatare from www.javaguides.net
     - Phrase from www.phrase.com
+    - Icons from https://freesvg.org

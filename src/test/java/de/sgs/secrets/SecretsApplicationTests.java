@@ -26,6 +26,17 @@ class SecretsApplicationTests {
         App app = appsService.getAppByRole("WHISKEY");
         app.setImage(image);
         appsService.saveApp(app);
+
+//        App app2 = new App();
+        App app2 = appsService.getAppByRole("KNOWHOW");
+        image = Helper.loadResource("static/images/lightbulb-4.png");
+        app2.setImage(image);
+        app2.setEndpoint("/knowhow/show");
+        app2.setHeadline("cards.knowhow.headline");
+        app2.setText("cards.knowhow.text");
+        app2.setButton("cards.knowhow.button");
+        appsService.saveApp(app2);
+
     }
 
 
