@@ -67,3 +67,31 @@ create table if not exists whiskeys (
     userId      bigint,
     userName    varchar(255)
 );
+
+# create table if not exists category (
+#     id   bigint auto_increment primary key,
+#     category varchar(255)
+# );
+
+create table if not exists knowhow (
+    id          bigint auto_increment primary key,
+    date        DATETIME,
+    URL         varchar(255),
+    category    varchar(255),
+    description text,
+    FULLTEXT ( description ),
+    image       LONGBLOB
+);
+
+# create fulltext index knowhow_desc_idx
+#     on knowhow (description);
+
+# create table if not exists knowhow_categories (
+#        knowhow_id bigint not null,
+#        category_id bigint not null,
+#        primary key (knowhow_id, category_id),
+#        constraint cat1
+#            foreign key (knowhow_id) references knowhow (id),
+#        constraint cat2
+#            foreign key (category_id) references category (id)
+# );

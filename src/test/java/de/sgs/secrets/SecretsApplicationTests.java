@@ -22,14 +22,13 @@ class SecretsApplicationTests {
 
     @Test
     void loadImages() {
-        byte[] image = Helper.loadResource("static/images/whiskey3.png");
+        byte[] image = Helper.loadResource("static/images/casketofsomething.png");
         App app = appsService.getAppByRole("WHISKEY");
         app.setImage(image);
         appsService.saveApp(app);
 
-//        App app2 = new App();
         App app2 = appsService.getAppByRole("KNOWHOW");
-        image = Helper.loadResource("static/images/lightbulb-4.png");
+        image = Helper.loadResource("static/images/ideas.png");
         app2.setImage(image);
         app2.setEndpoint("/knowhow/show");
         app2.setHeadline("cards.knowhow.headline");

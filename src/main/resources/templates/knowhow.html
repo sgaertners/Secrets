@@ -25,13 +25,34 @@
     <div class="container">
         <h3 th:text="#{page.knowhow.title}"></h3>
         <br />
-
-        <div class="row">
-            <div class="col-12">
-                <br />
-                <a class="btn btn-secondary" th:href="@{/welcome}" th:text="#{page.back}"></a>&nbsp;&nbsp;&nbsp;
+        <form method="POST" enctype="multipart/form-data" th:action="@{/knowhow/upload}" th:object="${knowhow}">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group mb-3">
+                        <label class="control-label" th:text="#{page.knowhow.url}"></label>
+                        <input type="text" id="url" name="url" class="form-control" th:placeholder="#{page.knowhow.url.placeholder}" th:field="*{url}"/>
+                    </div>
+                </div>
             </div>
-        </div>
+<!--            <div class="row">-->
+<!--                <div class="col-12">-->
+<!--                    <div class="form-group mb-3">-->
+<!--                        <label class="control-label" th:text="#{page.knowhow.description}"></label>-->
+<!--                        <textarea type="text" id="description" name="description" rows="15" class="form-control" th:placeholder="#{page.knowhow.description.placeholder}" th:field="*{description}"></textarea>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+            <div class="row">
+                <div class="col-12">
+                    <br />
+                    <a class="btn btn-secondary" th:href="@{/welcome}" th:text="#{page.back}"></a>&nbsp;&nbsp;&nbsp;
+                    <a class="btn btn-primary" th:href="@{/knowhow/list}" th:text="#{page.knowhow.list}"></a>&nbsp;&nbsp;&nbsp;
+                    <button type="submit" class="btn btn-success" th:text="#{page.knowhow.submit}"></button>
+                </div>
+
+            </div>
+        </form>
         <div th:insert="~{last :: copy}"></div>
     </div>
 
