@@ -5,6 +5,8 @@ import de.sgs.secrets.entities.Role;
 import de.sgs.secrets.repositories.AppsRepository;
 import org.springframework.stereotype.Service;
 
+import javax.sql.rowset.serial.SerialBlob;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 

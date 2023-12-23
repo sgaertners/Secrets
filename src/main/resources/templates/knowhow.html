@@ -50,7 +50,12 @@
                     <a class="btn btn-primary" th:href="@{/knowhow/list}" th:text="#{page.knowhow.list}"></a>&nbsp;&nbsp;&nbsp;
                     <button type="submit" class="btn btn-success" th:text="#{page.knowhow.submit}"></button>
                 </div>
-
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <br />
+                    <img th:src="@{/dbimage(id=${knowhow.id}, kind='KNOWHOW')}" alt="Screenshot" th:if="${knowhow.getImage()}"/>
+                </div>
             </div>
         </form>
         <div th:insert="~{last :: copy}"></div>

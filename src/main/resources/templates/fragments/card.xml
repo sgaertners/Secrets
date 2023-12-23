@@ -1,5 +1,5 @@
 <div class="card" style="width: 18rem;">
-  <img src="/dbimage?id=${image}" class="card-img-top" alt="image"/>
+  <img src="/dbimage?id=${image}&kind=${kind}" class="card-img-top" alt="image"/>
   <div class="card-body">
     <h5 class="card-title">${headline}</h5>
     <p class="card-text">${text}</p>

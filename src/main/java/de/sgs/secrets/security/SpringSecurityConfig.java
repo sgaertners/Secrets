@@ -77,6 +77,7 @@ public class SpringSecurityConfig {
                 .requestMatchers("/favicon.ico").permitAll()
                 .requestMatchers(req -> req.getParameterMap().containsKey("lang")).permitAll() // Spring Security 6 Spring Boot 3 & I18N
                 .requestMatchers(req -> req.getParameterMap().containsKey("id")).permitAll()
+                .requestMatchers(req -> req.getParameterMap().containsKey("kind")).permitAll()
             ).formLogin(
                 form -> form
                         .loginPage("/login")

@@ -23,7 +23,7 @@ public class HtmlTools {
         return text;
     }
 
-    public String generateCardFromApp(App app, String lang) {
+    public String generateCardFromApp(App app, String lang, String kind) {
         HashMap<String, String> map = null;
         HashMap<String, String> messageKeys = null;
         String card = "";
@@ -41,6 +41,7 @@ public class HtmlTools {
         map.put("headline", getMessage(app.getHeadline(), lang));
         map.put("text", getMessage(app.getText(), lang));
         map.put("button", getMessage(app.getButton(), lang));
+        map.put("kind", kind);
 
         return Helper.resolve(card, map);
     }

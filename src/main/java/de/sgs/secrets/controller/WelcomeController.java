@@ -112,7 +112,7 @@ public class WelcomeController {
                 if (userRoles.contains(role)) {
                     App app = this.appsService.getAppByRole(role);
                     if (app != null) {
-                        html.append(htmlTools.generateCardFromApp(app, lang));
+                        html.append(htmlTools.generateCardFromApp(app, lang, "APPS"));
                     }
                 }
             }
@@ -139,7 +139,6 @@ public class WelcomeController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
             String name = authentication.getName();
-//            out.println(name);
         }
 
         return "welcome";
@@ -171,10 +170,5 @@ public class WelcomeController {
         return "redirect:welcome";
     }
 
-
-    @RequestMapping("/dbimage")
-    public @ResponseBody byte[] loadImage(@RequestParam Long id) {
-        return this.appsService.getImageById(id);
-    }
 
 }
