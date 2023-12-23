@@ -78,8 +78,9 @@ create table if not exists knowhow (
     date        DATETIME,
     URL         varchar(255),
     category    varchar(255),
+    title       varchar(255),
     description text,
-    FULLTEXT ( description ),
+    FULLTEXT ( title, description ),
     image       LONGBLOB
 );
 

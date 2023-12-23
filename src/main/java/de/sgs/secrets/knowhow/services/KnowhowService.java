@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.List;
 
 @Service
 public class KnowhowService {
@@ -31,6 +32,10 @@ public class KnowhowService {
         }
 
         return image;
+    }
+
+    public List<Knowhow> findKnowHow(String search) {
+        return this.knowhowRepository.fullTextSearch(search);
     }
 
 

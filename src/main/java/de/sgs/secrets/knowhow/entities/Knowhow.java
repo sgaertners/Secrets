@@ -33,6 +33,8 @@ public class Knowhow {
 //    )
 //    private Set<Category> categories;
     @Column
+    private String title;
+    @Column
     private String description;
     @Column
     private Blob image;

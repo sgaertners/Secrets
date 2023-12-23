@@ -6,6 +6,7 @@ import com.microsoft.playwright.Playwright;
 import com.microsoft.playwright.options.ScreenshotType;
 import de.sgs.secrets.entities.User;
 import de.sgs.secrets.knowhow.entities.Knowhow;
+import de.sgs.secrets.knowhow.entities.Search;
 import de.sgs.secrets.knowhow.services.KnowhowService;
 import de.sgs.secrets.services.CustomUserDetailsService;
 import jakarta.validation.Valid;
@@ -26,6 +27,8 @@ import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/knowhow")
@@ -56,6 +59,46 @@ public class KnowhowController {
         return "knowhow";
     }
 
+
+    @GetMapping("/list")
+    public String listKnowHow(Model model) {
+        if (checkUserHasNotRole("KNOWHOW")) {
+            return "redirect:/welcome";
+        }
+
+        Knowhow knowhow = (Knowhow) model.getAttribute("knowhow");
+        if (knowhow == null) {
+            knowhow = new Knowhow();
+        }
+
+        model.addAttribute("knowhow", knowhow);
+
+        return "knowhowsearch";
+    }
+
+    @RequestMapping("/search")
+    public String searchKnowHow(@Valid @ModelAttribute("search") Search search, Model model) {
+        List<Knowhow> results = new ArrayList<>();
+        if (checkUserHasNotRole("KNOWHOW")) {
+            return "redirect:/knowhow";
+        }
+
+        search = (Search) model.getAttribute("search");
+        if (search == null) {
+            search = new Search();
+        }
+
+        if (search.getToSearch() != null && !search.getToSearch().isEmpty()) {
+            results = knowhowService.findKnowHow(search.getToSearch());
+        }
+
+        model.addAttribute("search", search);
+        model.addAttribute("searchresults", results);
+
+        return "knowhowsearch";
+    }
+
+
     @PostMapping("/upload")
     public String saveKnowhow(@Valid @ModelAttribute("knowhow") Knowhow knowhow, Model model) {
         if (checkUserHasNotRole("KNOWHOW")) {
@@ -68,7 +111,11 @@ public class KnowhowController {
         try {
             doc = Jsoup.connect(knowhow.getUrl()).get();
             String text = doc.body().text();
+            String title = doc.title();
             knowhow.setDescription(text);
+            if (!title.isEmpty()) {
+                knowhow.setTitle(title);
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -23,37 +23,23 @@
     <br /><br />
 
     <div class="container">
-        <h3 th:text="#{page.knowhow.title}"></h3>
+        <h3 th:text="#{page.knowhow.list.title}"></h3>
         <br />
-        <form method="POST" enctype="multipart/form-data" th:action="@{/knowhow/upload}" th:object="${knowhow}">
+        <form method="POST" enctype="multipart/form-data" th:action="@{/knowhow/search}" th:object="${search}">
             <div class="row">
                 <div class="col-12">
                     <div class="form-group mb-3">
-                        <label class="control-label" th:text="#{page.knowhow.url}"></label>
-                        <input type="text" id="url" name="url" class="form-control" th:placeholder="#{page.knowhow.url.placeholder}" th:field="*{url}"/>
+                        <label class="control-label" th:text="#{page.knowhow.search}"></label>
+                        <input type="text" id="toSearch" name="toSearch" class="form-control" th:placeholder="#{page.knowhow.search.placeholder}" th:field="*{toSearch}"/>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="form-group mb-3">
-                        <label class="control-label" th:text="#{page.knowhow.title}"></label>
-                        <input type="text" id="title" name="title" class="form-control" th:placeholder="#{page.knowhow.title.placeholder}" th:field="*{title}"/>
-                    </div>
-                </div>
-            </div>
+
             <div class="row">
                 <div class="col-12">
                     <br />
-                    <a class="btn btn-secondary" th:href="@{/welcome}" th:text="#{page.back}"></a>&nbsp;&nbsp;&nbsp;
-                    <a class="btn btn-primary" th:href="@{/knowhow/search}" th:text="#{page.knowhow.list}"></a>&nbsp;&nbsp;&nbsp;
-                    <button type="submit" class="btn btn-success" th:text="#{page.knowhow.submit}"></button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <br />
-                    <img th:src="@{/dbimage(id=${knowhow.id}, kind='KNOWHOW')}" alt="Screenshot" th:if="${knowhow.getImage()}"/>
+                    <a class="btn btn-secondary" th:href="@{/knowhow/show}" th:text="#{page.back}"></a>&nbsp;&nbsp;&nbsp;
+                    <button type="submit" class="btn btn-success" th:text="#{page.search.submit}"></button>
                 </div>
             </div>
         </form>

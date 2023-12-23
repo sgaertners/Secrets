@@ -60,6 +60,7 @@ public class SpringSecurityConfig {
                 .requestMatchers("/welcome/**").authenticated()
                 .requestMatchers("/whiskey/**").authenticated()
                 .requestMatchers("/knowhow/**").authenticated()
+                .requestMatchers("/knowhow/search").authenticated()
                 .requestMatchers("/whiskey/save").authenticated()
                 .requestMatchers("/whiskey/update").authenticated()
                 .requestMatchers("/whiskey/upload").authenticated()
