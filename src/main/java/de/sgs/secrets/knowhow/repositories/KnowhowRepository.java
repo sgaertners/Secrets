@@ -8,7 +8,8 @@ import java.util.List;
 
 public interface KnowhowRepository extends JpaRepository<Knowhow, Long> {
 
-    // JPA doesn't support Fulltext-Search with MySQL, only a native Query will do that.
+    // Queries in @Query annotations of Spring Data JPA are assumed to be JPQL queries.
+    // JPQL does not support full text search, only a native Query will do that.
     @Query(value = "SELECT * FROM knowhow WHERE MATCH (title, description) AGAINST (:keyword IN NATURAL LANGUAGE MODE)", nativeQuery = true)
     List<Knowhow> fullTextSearch(String keyword);
 

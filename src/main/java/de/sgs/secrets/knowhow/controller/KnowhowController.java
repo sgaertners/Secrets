@@ -112,7 +112,7 @@ public class KnowhowController {
             doc = Jsoup.connect(knowhow.getUrl()).get();
             String text = doc.body().text();
             String title = doc.title();
-            knowhow.setDescription(text);
+            knowhow.setDescription("<pre>" + text + "</pre>");
             if (!title.isEmpty()) {
                 knowhow.setTitle(title);
             }
