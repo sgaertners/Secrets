@@ -69,6 +69,7 @@ public class SpringSecurityConfig {
                 .requestMatchers("/whiskey/list").authenticated()
                 .requestMatchers("/whiskey/print").authenticated()
                 .requestMatchers("/dbimage").authenticated()
+                .requestMatchers("/js/**").authenticated()
                 .requestMatchers("/resources/**").permitAll()
                 .requestMatchers("/webjars/**").permitAll()
                 .requestMatchers("/").permitAll()

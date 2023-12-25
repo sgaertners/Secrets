@@ -1,6 +1,6 @@
 package de.sgs.secrets.enums;
 
-public enum ImageKind {
+public enum ExtraKind {
 
     APPS, KNOWHOW;
 }

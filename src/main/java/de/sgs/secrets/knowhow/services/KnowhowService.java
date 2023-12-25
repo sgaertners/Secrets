@@ -34,6 +34,11 @@ public class KnowhowService {
         return image;
     }
 
+    public String getTextById(Long id) {
+        Knowhow knowhow = knowhowRepository.findById(id).get();
+        return knowhow.getDescription();
+    }
+
     public List<Knowhow> findKnowHow(String search) {
         return this.knowhowRepository.fullTextSearch(search);
     }

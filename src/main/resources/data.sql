@@ -271,5 +271,15 @@ INSERT IGNORE INTO `languages` (`id`, `locale`, `messagekey`, `messagecontent`) 
      (259,'de','page.search.action','Aktion'),
      (260,'en','page.search.action','Action'),
      (261,'de','page.search.nr','Nr.'),
-     (262,'en','page.search.nr','Nr.');
+     (262,'en','page.search.nr','Nr.'),
+     (263,'de','page.search.result','Suchergebniss:'),
+     (264,'en','page.search.result','Searchresult:'),
+     (265,'de','page.search.details','Suchergebniss...'),
+     (266,'en','page.search.details','Searchresult...'),
+     (267,'de','page.search.details.pic','Screenshot'),
+     (268,'en','page.search.details.pic','Screenshot'),
+     (269,'de','page.search.details.text','Text'),
+     (270,'en','page.search.details.text','Text'),
+     (271,'de','page.search.details.btn','Schließen'),
+     (272,'en','page.search.details.btn','Close');
 

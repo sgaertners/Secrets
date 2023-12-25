@@ -105,37 +105,38 @@ public class KnowhowController {
             return "redirect:/welcome";
         }
 
-        java.sql.Date date = java.sql.Date.valueOf(LocalDate.now());
-        knowhow.setDate(date);
-        Document doc = null;
-        try {
-            doc = Jsoup.connect(knowhow.getUrl()).get();
-            String text = doc.body().text();
-            String title = doc.title();
-            knowhow.setDescription("<pre>" + text + "</pre>");
-            if (!title.isEmpty()) {
-                knowhow.setTitle(title);
+        if (!knowhow.getUrl().isEmpty() && knowhow.getUrl().toLowerCase().contains("http")) {
+            java.sql.Date date = java.sql.Date.valueOf(LocalDate.now());
+            knowhow.setDate(date);
+            Document doc = null;
+            try {
+                doc = Jsoup.connect(knowhow.getUrl()).get();
+                String text = doc.body().text();
+                String title = doc.title();
+                knowhow.setDescription("<pre>" + text + "</pre>");
+                if (!title.isEmpty()) {
+                    knowhow.setTitle(title);
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
-        try (Playwright playwright = Playwright.create()) {
-            Browser browser = playwright.chromium().launch();
-            Page page = browser.newPage();
-            page.navigate(knowhow.getUrl());
-            Page.ScreenshotOptions screenshotOptions = new Page.ScreenshotOptions()
-                .setFullPage(true)
-                .setType(ScreenshotType.PNG);
-            byte[] screenshot = page.screenshot(screenshotOptions);
-            Blob blob = new SerialBlob(screenshot);
-            knowhow.setImage(blob);
-        } catch (SerialException e) {
-            throw new RuntimeException(e);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            try (Playwright playwright = Playwright.create()) {
+                Browser browser = playwright.chromium().launch();
+                Page page = browser.newPage();
+                page.navigate(knowhow.getUrl());
+                Page.ScreenshotOptions screenshotOptions = new Page.ScreenshotOptions()
+                        .setFullPage(true)
+                        .setType(ScreenshotType.PNG);
+                byte[] screenshot = page.screenshot(screenshotOptions);
+                Blob blob = new SerialBlob(screenshot);
+                knowhow.setImage(blob);
+            } catch (SerialException e) {
+                throw new RuntimeException(e);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
-
         model.addAttribute("knowhow", knowhow);
 
         knowhowService.save(knowhow);
