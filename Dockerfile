@@ -1,7 +1,5 @@
-FROM ubuntu:latest
-LABEL authors="SGaertners"
-FROM openjdk:17
-copy ./target/secrets.jar secrets.jar
-CMD ["java","-jar","secrets.jar"]
-
-ENTRYPOINT ["top", "-b"]
+FROM eclipse-temurin:17-jdk-alpine
+VOLUME /tmp
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} secrets.jar
+ENTRYPOINT ["java","-jar","/secrets.jar"]

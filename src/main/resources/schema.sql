@@ -39,13 +39,17 @@ create table if not exists languages (
 );
 
 create table if not exists apps (
-    id          int not null primary key,
-    role        varchar(255) not null unique,
-    endpoint    varchar(255) not null unique,
-    image       Blob null,
-    headline    varchar(255),
-    text        varchar(1024),
-    button      varchar(255)
+    id       int not null primary key,
+    role     varchar(255)  not null,
+    endpoint varchar(255)  not null,
+    image    blob          null,
+    headline varchar(255)  null,
+    text     varchar(1024) null,
+    button   varchar(255)  null,
+    constraint endpoint
+        unique (endpoint),
+    constraint role
+        unique (role)
 );
 
 create table if not exists whiskeys (
